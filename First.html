@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Lock Screen</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #lockscreen {
+            text-align: center;
+        }
+        .number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            font-size: 24px;
+            background-color: #444;
+            color: white;
+            line-height: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .number:active {
+            background-color: #666; /* Darker color when clicked */
+        }
+        #message {
+            margin-top: 20px;
+            color: red;
+        }
+        #inputDisplay {
+            font-size: 24px;
+            margin-top: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="lockscreen">
+        <h1>Enter Password</h1>
+        <p>(Password of iPhone)</p>
+        <div id="numbers">
+            <div class="number" onclick="enterNumber(1)" aria-label="Number 1">1</div>
+            <div class="number" onclick="enterNumber(2)" aria-label="Number 2">2</div>
+            <div class="number" onclick="enterNumber(3)" aria-label="Number 3">3</div>
+            <div class="number" onclick="enterNumber(4)" aria-label="Number 4">4</div>
+            <div class="number" onclick="enterNumber(5)" aria-label="Number 5">5</div>
+            <div class="number" onclick="enterNumber(6)" aria-label="Number 6">6</div>
+            <div class="number" onclick="enterNumber(7)" aria-label="Number 7">7</div>
+            <div class="number" onclick="enterNumber(8)" aria-label="Number 8">8</div>
+            <div class="number" onclick="enterNumber(9)" aria-label="Number 9">9</div>
+        </div>
+        <div id="inputDisplay"></div>
+        <div id="message"></div>
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <script>
+        let inputPassword = '';
+
+        function enterNumber(num) {
+            inputPassword += num;
+            document.getElementById('inputDisplay').innerText = inputPassword; // Display entered numbers
+        }
+
+        function checkPassword() {
+            if (inputPassword === '927465') {
+                window.location.href = 'second.html'; // Redirect to second webpage
+            } else {
+                document.getElementById('message').innerText = 'Password incorrect, try again.';
+                inputPassword = ''; // Reset input
+                document.getElementById('inputDisplay').innerText = ''; // Clear displayed input
+            }
+        }
+    </script>
+</body>
+</html>

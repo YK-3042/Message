@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Card</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #poem {
+            font-size: 24px;
+            margin: 20px;
+            white-space: pre-wrap;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        #backButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #playButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundMusic" src="Umbrella.mp3" loop></audio>
+    
+    <button id="playButton" onclick="playMusic()">Play Music</button>
+    <div id="poem">
+        🌸 To My Precious Bestie 🌸<br><br>
+        Hey bestie, you're a shining light, ✨<br>
+        Brighter than stars on the darkest night. 🌙<br>
+        Through my nonsense, you still stay near,<br>
+        Laughing, loving, wiping my tear. 💖<br><br>
+        I know I irritated and made you sigh, 😅<br>
+        Stupid me, don't ask me why! 🙈<br>
+        But if I could, I'd turn back time,<br>
+        To keep that sparkle in your eye. ✨<br><br>
+        So here’s a hug in words so true, 🤗<br>
+        A tiny poem just for you.<br>
+        Forgive my foolish, goofy ways,<br>
+        Because you brighten all my days! 💕
+    </div>
+    <button id="backButton" onclick="goHome()">Back to Home</button>
+
+    <script>
+        function goHome() {
+            window.location.href = 'second.html'; // Redirect to home page
+        }
+
+        function playMusic() {
+            const audio = document.getElementById('backgroundMusic');
+            audio.volume = 0.1; // Set volume to 10%
+            audio.play().catch(error => {
+                console.log("Autoplay was prevented. Please click the play button.");
+            });
+        }
+
+        // Automatically play music when the page loads
+        window.onload = function() {
+            const audio = document.getElementById('backgroundMusic');
+            audio.volume = 0.1; // Set volume to 10%
+            audio.play().catch(error => {
+                console.log("Autoplay was prevented. Please click the play button.");
+            });
+        };
+    </script>
+</body>
+</html>

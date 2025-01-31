@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Me Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #gameMessage {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #backButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #clickCircle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            display: none; /* Initially hidden */
+        }
+        #score {
+            font-size: 20px;
+            margin: 20px;
+        }
+        #timer {
+            font-size: 20px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameMessage">Click the circle within 5 seconds!</div>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time: 5</div>
+    <button id="startButton" onclick="startGame()">Start</button>
+    <button id="backButton" onclick="goHome()">Back to Home</button>
+    <div id="clickCircle" onclick="circleClicked()"></div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 5;
+        let timerInterval;
+
+        function startGame() {
+            score = 0;
+            timeLeft = 5;
+            document.getElementById("score").innerText = "Score: " + score;
+            document.getElementById("timer").innerText = "Time: " + timeLeft;
+            document.getElementById("gameMessage").innerText = "Click the circle within 5 seconds!";
+            moveCircle();
+            startTimer();
+        }
+
+        function moveCircle() {
+            const circle = document.getElementById("clickCircle");
+            const x = Math.random() * (window.innerWidth - 50); // Random x position
+            const y = Math.random() * (window.innerHeight - 50); // Random y position
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            circle.style.display = 'block'; // Show the circle
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").innerText = "Time: " + timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById("clickCircle").style.display = 'none'; // Hide the circle
+                    document.getElementById("gameMessage").innerText = "Time's up! Your score: " + score;
+                }
+            }, 1000);
+        }
+
+        function circleClicked() {
+            score++;
+            document.getElementById("score").innerText = "Score: " + score;
+            if (score >= 10) {
+                document.getElementById("gameMessage").innerText = "Hey! You won by crossing all the obstacles in the way, and finally achieved your goal 🥳 (FYI: It's not about game 😉)";
+                clearInterval(timerInterval);
+                document.getElementById("clickCircle").style.display = 'none'; // Hide the circle
+            } else {
+                timeLeft = 5; // Reset timer
+                document.getElementById("timer").innerText = "Time: " + timeLeft;
+                moveCircle(); // Move the circle to a new position
+            }
+        }
+
+        function goHome() {
+            window.location.href = 'second.html'; // Redirect to home page
+        }
+    </script>
+</body>
+</html>
